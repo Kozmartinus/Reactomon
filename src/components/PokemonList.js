@@ -4,7 +4,7 @@ import Pokemon from "./Pokemon";
 class PokemonList extends Component {
   render() {
     return (
-      <div className="cards-container">
+      <div>
         {this.props.pokemons.map((pokemon) => (
           <Pokemon pokemon={pokemon} />
         ))}

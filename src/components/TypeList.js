@@ -4,7 +4,7 @@ import Type from "./Type";
 class TypeList extends Component {
   render() {
     return (
-      <div className="cards-container">
+      <div>
         {this.props.types.map((type) => (
           <Type type={type} />
         ))}
