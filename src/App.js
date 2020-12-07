@@ -5,30 +5,31 @@ import axios from "axios";
 import Home from "./components/Home";
 import Header from "./components/Header";
 import PokemonList from "./components/PokemonList";
+import TypeList from "./components/TypeList";
 import Pagination from "./components/Pagination";
 
 import "./App.css";
 
 class App extends Component {
-  state = {
-    pokemons: [],
-    types: [],
-  };
+  state = {};
 
-  componentDidMount() {
-    axios.get("https://pokeapi.co/api/v2/pokemon").then((res) =>
-      this.setState({
-        pokemons: res.data,
-        types: [...this.state.types],
-      })
-    );
+  async componentDidMount() {
+    const [pokemonsData, typesData] = await Promise.all([
+      axios.get("https://pokeapi.co/api/v2/pokemon"),
+      axios.get("https://pokeapi.co/api/v2/type"),
+    ]);
+
+    this.setState({
+      pokemons: pokemonsData.data,
+      types: typesData.data,
+    });
   }
 
   loadContent = (url) => {
     axios.get(url).then((res) =>
       this.setState({
         pokemons: res.data,
-        types: [...this.state.types],
+        types: this.state.types,
       })
     );
   };
@@ -56,7 +57,11 @@ class App extends Component {
             <Route
               exact
               path="/types"
-              render={(props) => <React.Fragment></React.Fragment>}
+              render={(props) => (
+                <React.Fragment>
+                  <TypeList types={this.state.types.results} />
+                </React.Fragment>
+              )}
             />
             <Route exact path="/" component={Home} />
           </div>
