@@ -5,6 +5,7 @@ import axios from "axios";
 import Home from "./components/Home";
 import Header from "./components/Header";
 import PokemonList from "./components/PokemonList";
+import Pagination from "./components/Pagination";
 
 import "./App.css";
 
@@ -35,6 +36,8 @@ class App extends Component {
               render={(props) => (
                 <React.Fragment>
                   <PokemonList pokemons={this.state.pokemons.results} />
+                  <hr />
+                  <Pagination paginationLinks={this.state.pokemons} />
                 </React.Fragment>
               )}
             />
