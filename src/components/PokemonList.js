@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import PokemonDetail from "./PokemonDetail";
+import Pokemon from "./Pokemon";
 
 class PokemonList extends Component {
   render() {
     return (
       <div className="cards-container">
         {this.props.pokemons.map((pokemon) => (
-          <PokemonDetail pokemon={pokemon} />
+          <Pokemon pokemon={pokemon} />
         ))}
       </div>
     );
