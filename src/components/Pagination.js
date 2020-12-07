@@ -20,9 +20,9 @@ class Pagination extends Component {
       </button>
     );
     return (
-      <div>
-        {previous ? previousButton : ""}
-        {next ? nextButton : ""}
+      <div className="pagination">
+        <div className="pagination-block">{previous ? previousButton : ""}</div>
+        <div className="pagination-block">{next ? nextButton : ""}</div>
       </div>
     );
   }
