@@ -24,6 +24,15 @@ class App extends Component {
     );
   }
 
+  loadContent = (url) => {
+    axios.get(url).then((res) =>
+      this.setState({
+        pokemons: res.data,
+        types: [...this.state.types],
+      })
+    );
+  };
+
   render() {
     return (
       <Router>
@@ -37,7 +46,10 @@ class App extends Component {
                 <React.Fragment>
                   <PokemonList pokemons={this.state.pokemons.results} />
                   <hr />
-                  <Pagination paginationLinks={this.state.pokemons} />
+                  <Pagination
+                    paginationLinks={this.state.pokemons}
+                    loadContent={this.loadContent}
+                  />
                 </React.Fragment>
               )}
             />
