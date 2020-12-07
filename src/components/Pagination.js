@@ -3,8 +3,22 @@ import React, { Component } from "react";
 class Pagination extends Component {
   render() {
     const { next, previous } = this.props.paginationLinks;
-    const previousButton = <button style={btnStyle}>{previous}</button>;
-    const nextButton = <button style={btnStyle}>{next}</button>;
+    const previousButton = (
+      <button
+        onClick={this.props.loadContent.bind(this, previous)}
+        style={btnStyle}
+      >
+        Previous page
+      </button>
+    );
+    const nextButton = (
+      <button
+        onClick={this.props.loadContent.bind(this, next)}
+        style={btnStyle}
+      >
+        Next page
+      </button>
+    );
     return (
       <div>
         {previous ? previousButton : ""}
