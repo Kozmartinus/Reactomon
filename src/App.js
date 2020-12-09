@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import axios from "axios";
 
@@ -10,65 +10,69 @@ import Pagination from "./components/Pagination";
 
 import "./App.css";
 
-class App extends Component {
-  state = {};
+const App = (props) => {
+  const [pokemons, setPokemons] = useState([]);
+  const [types, setTypes] = useState([]);
 
-  async componentDidMount() {
+  useEffect(async () => {
     const [pokemonsData, typesData] = await Promise.all([
       axios.get("https://pokeapi.co/api/v2/pokemon"),
       axios.get("https://pokeapi.co/api/v2/type"),
     ]);
 
-    this.setState({
-      pokemons: pokemonsData.data,
-      types: typesData.data,
-    });
-  }
+    setPokemons(pokemonsData.data);
+    setTypes(typesData.data);
+  }, []);
 
-  loadContent = (url) => {
-    axios.get(url).then((res) =>
-      this.setState({
-        pokemons: res.data,
-        types: this.state.types,
-      })
-    );
+  // async componentDidMount() {
+  // const [pokemonsData, typesData] = await Promise.all([
+  //   axios.get("https://pokeapi.co/api/v2/pokemon"),
+  //   axios.get("https://pokeapi.co/api/v2/type"),
+  // ]);
+
+  // this.setState({
+  //   pokemons: pokemonsData.data,
+  //   types: typesData.data,
+  // });
+  // }
+
+  const loadContent = (url) => {
+    axios.get(url).then((res) => setPokemons(res.data));
   };
 
-  render() {
-    return (
-      <Router>
-        <div className="App">
-          <div className="container">
-            <Header />
-            <Route
-              exact
-              path="/pokemons"
-              render={(props) => (
-                <React.Fragment>
-                  <PokemonList pokemons={this.state.pokemons.results} />
-                  <hr />
-                  <Pagination
-                    paginationLinks={this.state.pokemons}
-                    loadContent={this.loadContent}
-                  />
-                </React.Fragment>
-              )}
-            />
-            <Route
-              exact
-              path="/types"
-              render={(props) => (
-                <React.Fragment>
-                  <TypeList types={this.state.types.results} />
-                </React.Fragment>
-              )}
-            />
-            <Route exact path="/" component={Home} />
-          </div>
+  return (
+    <Router>
+      <div className="App">
+        <div className="container">
+          <Header />
+          <Route
+            exact
+            path="/pokemons"
+            render={(props) => (
+              <React.Fragment>
+                <PokemonList pokemons={pokemons.results} />
+                <hr />
+                <Pagination
+                  paginationLinks={pokemons}
+                  loadContent={loadContent}
+                />
+              </React.Fragment>
+            )}
+          />
+          <Route
+            exact
+            path="/types"
+            render={(props) => (
+              <React.Fragment>
+                <TypeList types={types.results} />
+              </React.Fragment>
+            )}
+          />
+          <Route exact path="/" component={Home} />
         </div>
-      </Router>
-    );
-  }
-}
+      </div>
+    </Router>
+  );
+};
 
 export default App;
