@@ -1,32 +1,24 @@
-import React, { Component } from "react";
+import React from "react";
 
-class Pagination extends Component {
-  render() {
-    const { next, previous } = this.props.paginationLinks;
-    const previousButton = (
-      <button
-        onClick={this.props.loadContent.bind(this, previous)}
-        style={btnStyle}
-      >
-        Previous page
-      </button>
-    );
-    const nextButton = (
-      <button
-        onClick={this.props.loadContent.bind(this, next)}
-        style={btnStyle}
-      >
-        Next page
-      </button>
-    );
-    return (
-      <div className="pagination">
-        <div className="pagination-block">{previous ? previousButton : ""}</div>
-        <div className="pagination-block">{next ? nextButton : ""}</div>
-      </div>
-    );
-  }
-}
+const Pagination = (props) => {
+  const { next, previous } = props.paginationLinks;
+  const previousButton = (
+    <button onClick={props.loadContent.bind(this, previous)} style={btnStyle}>
+      Previous page
+    </button>
+  );
+  const nextButton = (
+    <button onClick={props.loadContent.bind(this, next)} style={btnStyle}>
+      Next page
+    </button>
+  );
+  return (
+    <div className="pagination">
+      <div className="pagination-block">{previous ? previousButton : ""}</div>
+      <div className="pagination-block">{next ? nextButton : ""}</div>
+    </div>
+  );
+};
 
 const btnStyle = {
   background: "#ff0000",
