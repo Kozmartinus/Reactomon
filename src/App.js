@@ -24,18 +24,6 @@ const App = (props) => {
     setTypes(typesData.data);
   }, []);
 
-  // async componentDidMount() {
-  // const [pokemonsData, typesData] = await Promise.all([
-  //   axios.get("https://pokeapi.co/api/v2/pokemon"),
-  //   axios.get("https://pokeapi.co/api/v2/type"),
-  // ]);
-
-  // this.setState({
-  //   pokemons: pokemonsData.data,
-  //   types: typesData.data,
-  // });
-  // }
-
   const loadContent = (url) => {
     axios.get(url).then((res) => setPokemons(res.data));
   };
