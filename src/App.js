@@ -10,6 +10,7 @@ import TypeList from "./components/TypeList";
 import Pagination from "./components/Pagination";
 
 import "./App.css";
+import MainDiv from "./elements/MainDiv";
 
 const App = () => {
   const [pokemons, setPokemons] = useState([]);
@@ -33,36 +34,34 @@ const App = () => {
 
   return (
     <Router>
-      <div className="App">
-        <div className="container">
-          <Header />
-          <Route
-            exact
-            path="/pokemons"
-            render={(props) => (
-              <React.Fragment>
-                <PokemonList pokemons={pokemons.results} />
-                <hr />
-                <Pagination
-                  paginationLinks={pokemons}
-                  loadContent={loadContent}
-                />
-              </React.Fragment>
-            )}
-          />
-          <Route exact path="/pokemon/:id" component={ShowMyPokemon} />
-          <Route
-            exact
-            path="/types"
-            render={(props) => (
-              <React.Fragment>
-                <TypeList types={types.results} />
-              </React.Fragment>
-            )}
-          />
-          <Route exact path="/" component={Home} />
-        </div>
-      </div>
+      <MainDiv>
+        <Header />
+        <Route
+          exact
+          path="/pokemons"
+          render={(props) => (
+            <React.Fragment>
+              <PokemonList pokemons={pokemons.results} />
+              <hr />
+              <Pagination
+                paginationLinks={pokemons}
+                loadContent={loadContent}
+              />
+            </React.Fragment>
+          )}
+        />
+        <Route exact path="/pokemon/:id" component={ShowMyPokemon} />
+        <Route
+          exact
+          path="/types"
+          render={(props) => (
+            <React.Fragment>
+              <TypeList types={types.results} />
+            </React.Fragment>
+          )}
+        />
+        <Route exact path="/" component={Home} />
+      </MainDiv>
     </Router>
   );
 };
