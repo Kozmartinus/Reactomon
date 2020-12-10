@@ -1,35 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import HeaderElement, {
+  PageTitle,
+  HeaderLink,
+} from "../elements/HeaderElement";
 
 function Header() {
   return (
-    <header style={headerStyle}>
-      <h1>POKEMON</h1>
-      <Link style={linkStyle} to="/">
-        Home
+    <HeaderElement>
+      <PageTitle>POKEMON</PageTitle>
+      <Link to="/">
+        <HeaderLink>Home</HeaderLink>
       </Link>{" "}
       |{" "}
-      <Link style={linkStyle} to="/pokemons">
-        Pokemons
+      <Link to="/pokemons">
+        <HeaderLink>Pokemons</HeaderLink>
       </Link>{" "}
       |{" "}
-      <Link style={linkStyle} to="/types">
-        Types
+      <Link to="/types">
+        <HeaderLink>Types</HeaderLink>
       </Link>
-    </header>
+    </HeaderElement>
   );
 }
-
-const headerStyle = {
-  background: "#333",
-  color: "#fff",
-  textAlign: "center",
-  padding: "10px",
-};
-
-const linkStyle = {
-  color: "#fff",
-  textDecoration: "none",
-};
 
 export default Header;
