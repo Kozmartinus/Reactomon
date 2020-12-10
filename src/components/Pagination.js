@@ -1,33 +1,27 @@
 import React from "react";
+import PaginationElement, {
+  PaginationDiv,
+} from "../elements/PaginationElement";
+import { HeaderLink as PaginationButton } from "../elements/HeaderElement";
 
 const Pagination = (props) => {
   const { next, previous } = props.paginationLinks;
   const previousButton = (
-    <button onClick={props.loadContent.bind(this, previous)} style={btnStyle}>
+    <PaginationButton onClick={props.loadContent.bind(this, previous)}>
       Previous page
-    </button>
+    </PaginationButton>
   );
   const nextButton = (
-    <button onClick={props.loadContent.bind(this, next)} style={btnStyle}>
+    <PaginationButton onClick={props.loadContent.bind(this, next)}>
       Next page
-    </button>
+    </PaginationButton>
   );
   return (
-    <div className="pagination">
-      <div className="pagination-block">{previous ? previousButton : ""}</div>
-      <div className="pagination-block">{next ? nextButton : ""}</div>
-    </div>
+    <PaginationElement>
+      <PaginationDiv>{previous ? previousButton : ""}</PaginationDiv>
+      <PaginationDiv>{next ? nextButton : ""}</PaginationDiv>
+    </PaginationElement>
   );
-};
-
-const btnStyle = {
-  background: "#ff0000",
-  color: "#fff",
-  border: "none",
-  padding: "5px 9px",
-  margin: "6px 12px",
-  borderRadius: "10%",
-  cursor: "pointer",
 };
 
 export default Pagination;
