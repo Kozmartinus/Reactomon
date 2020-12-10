@@ -1,17 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import CardDiv, { PokemonName } from "../elements/CardDiv";
 
 const Pokemon = (props) => {
   const { name, url } = props.pokemon;
   const splittedUrl = url.split("/");
   const id = splittedUrl[splittedUrl.length - 2];
   return (
-    <div className="card">
-      <p>{name}</p>
+    <CardDiv>
+      <PokemonName>{name}</PokemonName>
       <Link to={`/pokemon/${id}`} pokemonId={id}>
         See details
       </Link>
-    </div>
+    </CardDiv>
   );
 };
 
