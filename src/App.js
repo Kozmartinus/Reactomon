@@ -14,7 +14,8 @@ const App = (props) => {
   const [pokemons, setPokemons] = useState([]);
   const [types, setTypes] = useState([]);
 
-  useEffect(async () => {
+  useEffect(() => {
+    (async function getInitialData() {
     const [pokemonsData, typesData] = await Promise.all([
       axios.get("https://pokeapi.co/api/v2/pokemon"),
       axios.get("https://pokeapi.co/api/v2/type"),
@@ -22,6 +23,7 @@ const App = (props) => {
 
     setPokemons(pokemonsData.data);
     setTypes(typesData.data);
+    })();
   }, []);
 
   const loadContent = (url) => {
