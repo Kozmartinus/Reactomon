@@ -24,4 +24,6 @@ export const HeaderLink = styled.button`
   outline: none;
   font-size: 18px;
   padding: 3px 6px;
+  cursor: pointer;
+  margin: 5px 12px 12px 12px;
 `;
