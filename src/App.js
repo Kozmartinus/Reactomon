@@ -10,7 +10,7 @@ import TypeList from "./components/TypeList";
 import Pagination from "./components/Pagination";
 
 import "./App.css";
-import MainDiv from "./elements/MainDiv";
+import { ThemeProvider } from "./context/ThemeContext";
 
 const App = () => {
   const [pokemons, setPokemons] = useState([]);
@@ -33,36 +33,38 @@ const App = () => {
   };
 
   return (
-    <Router>
-      <MainDiv>
-        <Header />
-        <Route
-          exact
-          path="/pokemons"
-          render={(props) => (
-            <React.Fragment>
-              <PokemonList pokemons={pokemons.results} />
-              <hr />
-              <Pagination
-                paginationLinks={pokemons}
-                loadContent={loadContent}
-              />
-            </React.Fragment>
-          )}
-        />
-        <Route exact path="/pokemon/:id" component={ShowMyPokemon} />
-        <Route
-          exact
-          path="/types"
-          render={(props) => (
-            <React.Fragment>
-              <TypeList types={types.results} />
-            </React.Fragment>
-          )}
-        />
-        <Route exact path="/" component={Home} />
-      </MainDiv>
-    </Router>
+    <ThemeProvider>
+      <Router>
+        <div className="App">
+          <Header />
+          <Route
+            exact
+            path="/pokemons"
+            render={(props) => (
+              <React.Fragment>
+                <PokemonList pokemons={pokemons.results} />
+                <hr />
+                <Pagination
+                  paginationLinks={pokemons}
+                  loadContent={loadContent}
+                />
+              </React.Fragment>
+            )}
+          />
+          <Route exact path="/pokemon/:id" component={ShowMyPokemon} />
+          <Route
+            exact
+            path="/types"
+            render={(props) => (
+              <React.Fragment>
+                <TypeList types={types.results} />
+              </React.Fragment>
+            )}
+          />
+          <Route exact path="/" component={Home} />
+        </div>
+      </Router>
+    </ThemeProvider>
   );
 };
 
