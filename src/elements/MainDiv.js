@@ -1,5 +1,5 @@
 import styled from "styled-components";
 
 export default styled.div`
-  background: #c9eaf5;
+  background: ${(props) => (props.theme === "pokemon" ? "#c9eaf5" : "black")};
 `;
