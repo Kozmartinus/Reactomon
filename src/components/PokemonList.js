@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
+import MainDiv from "../elements/MainDiv";
 import Pokemon from "./Pokemon";
+import { ThemeContext } from "../context/ThemeContext";
 
 const PokemonList = (props) => {
+  const [theme, setTheme] = useContext(ThemeContext);
   return (
-    <div>
+    <MainDiv theme={theme}>
       {props.pokemons.map((pokemon) => (
         <Pokemon pokemon={pokemon} />
       ))}
-    </div>
+    </MainDiv>
   );
 };
 

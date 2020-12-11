@@ -1,24 +1,42 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import HeaderElement, {
   PageTitle,
   HeaderLink,
 } from "../elements/HeaderElement";
+import { ThemeContext } from "../context/ThemeContext";
+import ToggleButton from "./ToggleButton";
+import "../App.css";
 
 function Header() {
+  const [theme, setTheme] = useContext(ThemeContext);
+  const [selected, setSelected] = useState(true);
+
   return (
-    <HeaderElement>
-      <PageTitle>POKEMON</PageTitle>
+    <HeaderElement theme={theme}>
+      <div>
+        <PageTitle theme={theme}>POKEMON</PageTitle>
+        <div className="toggle-div">
+          <ToggleButton
+            selected={selected}
+            toggleSelected={() => {
+              console.log(selected + " " + { theme });
+              setSelected(!selected);
+              setTheme(theme === "pokemon" ? "b&w" : "pokemon");
+            }}
+          />
+        </div>
+      </div>
       <Link to="/">
-        <HeaderLink>Home</HeaderLink>
+        <HeaderLink theme={theme}>Home</HeaderLink>
       </Link>{" "}
       |{" "}
       <Link to="/pokemons">
-        <HeaderLink>Pokemons</HeaderLink>
+        <HeaderLink theme={theme}>Pokemons</HeaderLink>
       </Link>{" "}
       |{" "}
       <Link to="/types">
-        <HeaderLink>Types</HeaderLink>
+        <HeaderLink theme={theme}>Types</HeaderLink>
       </Link>
     </HeaderElement>
   );
